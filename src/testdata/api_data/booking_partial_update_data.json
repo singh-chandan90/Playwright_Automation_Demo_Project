@@ -1,0 +1,16 @@
+{
+  "partialValid": {
+    "firstname": "PartialFirst",
+    "lastname": "PartialLast"
+  },
+  "partialMissingFirstname": {
+    "lastname": "PartialLast"
+  },
+  "partialInvalidPrice": {
+    "totalprice": "not-a-number"
+  },
+  "auth": {
+    "username": "admin",
+    "password": "password123"
+  }
+}

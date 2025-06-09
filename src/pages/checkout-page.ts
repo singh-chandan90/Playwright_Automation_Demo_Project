@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test';
+import logger from '../utils/LoggerUtil';
 
 export class CheckoutPage {
     private readonly page: Page;
@@ -22,21 +23,45 @@ export class CheckoutPage {
     }
 
     async verifyPageLoaded(): Promise<void> {
-        await this.checkoutTitle.waitFor({ state: 'visible' });
+        logger.debug('Verifying Checkout page loaded');
+        try {
+            await this.checkoutTitle.waitFor({ state: 'visible' });
+        } catch (error) {
+            logger.error('Error verifying Checkout page loaded: ' + error);
+            throw error;
+        }
     }
 
     async fillShippingInfo(firstName: string, lastName: string, zipCode: string): Promise<void> {
-        await this.firstNameInput.fill(firstName);
-        await this.lastNameInput.fill(lastName);
-        await this.zipCodeInput.fill(zipCode);
-        await this.continueButton.click();
+        logger.info(`Filling shipping info: ${firstName} ${lastName}, ${zipCode}`);
+        try {
+            await this.firstNameInput.fill(firstName);
+            await this.lastNameInput.fill(lastName);
+            await this.zipCodeInput.fill(zipCode);
+            await this.continueButton.click();
+        } catch (error) {
+            logger.error(`Failed to fill shipping info: ${error}`);
+            throw error;
+        }
     }
 
     async completePurchase(): Promise<void> {
-        await this.finishButton.click();
+        logger.info('Completing purchase');
+        try {
+            await this.finishButton.click();
+        } catch (error) {
+            logger.error('Error completing purchase: ' + error);
+            throw error;
+        }
     }
 
     async verifyOrderComplete(): Promise<void> {
-        await this.completeHeader.waitFor({ state: 'visible' });
+        logger.info('Verifying order completion');
+        try {
+            await this.completeHeader.waitFor({ state: 'visible' });
+        } catch (error) {
+            logger.error('Error verifying order completion: ' + error);
+            throw error;
+        }
     }
 }

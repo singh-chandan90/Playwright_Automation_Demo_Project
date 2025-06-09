@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test';
+import logger from '../utils/LoggerUtil';
 
 export class LoginPage {
     private readonly page: Page;
@@ -14,12 +15,25 @@ export class LoginPage {
     }
 
     async navigate(url: string): Promise<void> {
-        await this.page.goto(url);
+        logger.info(`Navigating to URL: ${url}`);
+        try {
+            await this.page.goto(url);
+        } catch (error) {
+            logger.error(`Error navigating to URL ${url}: ${error}`);
+            throw error;
+        }
     }
 
     async login(username: string, password: string): Promise<void> {
-        await this.usernameInput.fill(username);
-        await this.passwordInput.fill(password);
-        await this.loginButton.click();
+        logger.info(`Attempting login for user: ${username}`);
+        try {
+            await this.usernameInput.fill(username);
+            await this.passwordInput.fill(password);
+            await this.loginButton.click();
+            logger.info('Login button clicked');
+        } catch (error) {
+            logger.error(`Login failed for user ${username}: ${error}`);
+            throw error;
+        }
     }
 }
