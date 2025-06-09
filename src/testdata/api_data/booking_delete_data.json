@@ -1,0 +1,17 @@
+{
+  "auth": {
+    "username": "admin",
+    "password": "password123"
+  },
+  "deleteBookingData": {
+    "firstname": "DeleteMe",
+    "lastname": "User",
+    "totalprice": 123,
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2025-08-01",
+      "checkout": "2025-08-05"
+    },
+    "additionalneeds": "Dinner"
+  }
+}
