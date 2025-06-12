@@ -3,11 +3,10 @@ import path from "path";
 import moment from "moment-timezone";
 
 const currentDir = __dirname;
-// Go one level above (back to 'src')
-const srcDir = path.resolve(currentDir, "..");
-
+// Go one level above (project root)
+const projectRootDir = path.resolve(currentDir, "..");
 // Change to 'logging' folder
-const loggingDir = path.resolve(srcDir, "logging");
+const loggingDir = path.resolve(projectRootDir, "logging");
 
 // Function to format log entries with timestamp and timezone
 const customFormat = winston.format.printf(({ level, message, timestamp }) => {
@@ -40,6 +39,5 @@ const logger = winston.createLogger({
     }),
   ],
 });
-
 
 export default logger;

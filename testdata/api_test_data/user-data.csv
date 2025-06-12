@@ -1,0 +1,2 @@
+name,gender,email,status,update_name,update_gender,update_email,update_status
+John Doe,male,john.doe.csv@example.com,active,John Updated CSV,male,john.updated.csv@example.com,inactive
