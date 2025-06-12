@@ -1,0 +1,4 @@
+2025-06-12T23:39:36+05:30 [error]: Error proceeding to checkout: Error: locator.click: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('#checkout')[22m
+

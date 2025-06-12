@@ -1,0 +1,10 @@
+{
+  "qa": {
+    "newUserQuery": "SELECT name, gender, email, status FROM testdb.user_test_data WHERE id = 1",
+    "updateUserQuery": "SELECT name, gender, email, status FROM testdb.user_test_data WHERE id = 2"
+  },
+  "staging": {
+    "newUserQuery": "SELECT name, gender, email, status FROM user_test_data WHERE id = 1",
+    "updateUserQuery": "SELECT name, gender, email, status FROM user_test_data WHERE id = 2"
+  }
+}

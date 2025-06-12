@@ -3,11 +3,10 @@ import fs from "fs";
 import path from "path";
 
 const currentDir = __dirname;
-// Go one level above (back to 'src')
-const srcDir = path.resolve(currentDir, "..");
-
+// Go one level above (project root)
+const projectRootDir = path.resolve(currentDir, "..");
 // Change to 'config' folder
-const configDir = path.resolve(srcDir, "config");
+const configDir = path.resolve(projectRootDir, "config");
 let envFilePath = `${configDir}\\.env`;
 if (process.env.ENV) {
   envFilePath = `${configDir}\\.env.${process.env.ENV}`;
@@ -28,7 +27,7 @@ export function encryptEnvFile() {
     if (value) {
       const encryptedValue = CryptoJSUtilFile.AES.encrypt(
         value,
-        SALT,
+        SALT
       ).toString();
       return `${key}=${encryptedValue}`;
     }
@@ -54,7 +53,7 @@ export function decryptEnvFile() {
 
     if (value) {
       const decryptedValue = CryptoJSUtilFile.AES.decrypt(value, SALT).toString(
-        CryptoJSUtilFile.enc.Utf8,
+        CryptoJSUtilFile.enc.Utf8
       );
 
       return `${key}=${decryptedValue}`;

@@ -1,11 +1,9 @@
-// ESLint v9+ flat config for TypeScript + Playwright
-const tseslint = require('@typescript-eslint/eslint-plugin');
-const tsparser = require('@typescript-eslint/parser');
-const playwright = require('eslint-plugin-playwright');
-const prettier = require('eslint-config-prettier');
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsparser from '@typescript-eslint/parser';
+import playwright from 'eslint-plugin-playwright';
+import prettier from 'eslint-config-prettier';
 
-/** @type {import('eslint').Linter.FlatConfig[]} */
-module.exports = [
+export default [
   {
     files: ['**/*.ts', '**/*.js'],
     ignores: [

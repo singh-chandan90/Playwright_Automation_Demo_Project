@@ -1,0 +1,81 @@
+2025-06-12T23:25:43+05:30 [info]: Navigating to URL: https://www.saucedemo.com/
+2025-06-12T23:25:44+05:30 [info]: Attempting login for user: standard_user
+2025-06-12T23:25:44+05:30 [info]: Login button clicked
+2025-06-12T23:25:44+05:30 [info]: Adding product to cart: Sauce Labs Backpack
+2025-06-12T23:25:44+05:30 [info]: Product added to cart: Sauce Labs Backpack
+2025-06-12T23:25:44+05:30 [info]: Navigating to cart
+2025-06-12T23:25:44+05:30 [info]: Verifying product in cart: Sauce Labs Backpack
+2025-06-12T23:25:44+05:30 [info]: Proceeding to checkout
+2025-06-12T23:25:44+05:30 [info]: Filling shipping info: John Doe, 12345
+2025-06-12T23:25:44+05:30 [info]: Completing purchase
+2025-06-12T23:25:44+05:30 [info]: Verifying order completion
+2025-06-12T23:25:44+05:30 [info]: Verifying order completion
+2025-06-12T23:26:15+05:30 [info]: Navigating to URL: https://www.saucedemo.com/
+2025-06-12T23:26:16+05:30 [info]: Attempting login for user: standard_user
+2025-06-12T23:26:16+05:30 [info]: Login button clicked
+2025-06-12T23:26:16+05:30 [info]: Adding product to cart: Sauce Labs Backpack
+2025-06-12T23:26:16+05:30 [info]: Product added to cart: Sauce Labs Backpack
+2025-06-12T23:26:16+05:30 [info]: Navigating to cart
+2025-06-12T23:26:16+05:30 [info]: Verifying product in cart: Sauce Labs Backpack
+2025-06-12T23:26:16+05:30 [info]: Proceeding to checkout
+2025-06-12T23:26:16+05:30 [info]: Filling shipping info: John Doe, 12345
+2025-06-12T23:26:16+05:30 [info]: Completing purchase
+2025-06-12T23:26:16+05:30 [info]: Verifying order completion
+2025-06-12T23:26:16+05:30 [info]: Verifying order completion
+2025-06-12T23:28:29+05:30 [info]: Navigating to URL: https://www.saucedemo.com/
+2025-06-12T23:28:29+05:30 [info]: Attempting login for user: standard_user
+2025-06-12T23:28:30+05:30 [info]: Login button clicked
+2025-06-12T23:28:30+05:30 [info]: Adding product to cart: Sauce Labs Backpack
+2025-06-12T23:28:30+05:30 [info]: Product added to cart: Sauce Labs Backpack
+2025-06-12T23:28:30+05:30 [info]: Navigating to cart
+2025-06-12T23:28:30+05:30 [info]: Verifying product in cart: Sauce Labs Backpack
+2025-06-12T23:28:30+05:30 [info]: Proceeding to checkout
+2025-06-12T23:28:30+05:30 [info]: Filling shipping info: John Doe, 12345
+2025-06-12T23:28:30+05:30 [info]: Completing purchase
+2025-06-12T23:28:30+05:30 [info]: Verifying order completion
+2025-06-12T23:29:50+05:30 [info]: Navigating to URL: https://www.saucedemo.com/
+2025-06-12T23:29:50+05:30 [info]: Attempting login for user: standard_user
+2025-06-12T23:29:50+05:30 [info]: Login button clicked
+2025-06-12T23:29:50+05:30 [info]: Proceeding to checkout
+2025-06-12T23:33:05+05:30 [info]: Navigating to URL: https://www.saucedemo.com/
+2025-06-12T23:33:05+05:30 [info]: Attempting login for user: standard_user
+2025-06-12T23:33:06+05:30 [info]: Login button clicked
+2025-06-12T23:33:06+05:30 [info]: Adding product to cart: Sauce Labs Backpack
+2025-06-12T23:33:06+05:30 [info]: Product added to cart: Sauce Labs Backpack
+2025-06-12T23:33:06+05:30 [info]: Navigating to cart
+2025-06-12T23:33:06+05:30 [info]: Verifying product in cart: Sauce Labs Backpack
+2025-06-12T23:33:06+05:30 [info]: Proceeding to checkout
+2025-06-12T23:33:06+05:30 [info]: Filling shipping info: John Doe, 12345
+2025-06-12T23:33:06+05:30 [info]: Completing purchase
+2025-06-12T23:33:06+05:30 [info]: Verifying order completion
+2025-06-12T23:39:05+05:30 [info]: Navigating to URL: https://www.saucedemo.com/
+2025-06-12T23:39:06+05:30 [info]: Attempting login for user: standard_user
+2025-06-12T23:39:06+05:30 [info]: Login button clicked
+2025-06-12T23:39:06+05:30 [info]: Proceeding to checkout
+2025-06-12T23:39:36+05:30 [error]: Error proceeding to checkout: Error: locator.click: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('#checkout')[22m
+
+2025-06-12T23:39:45+05:30 [info]: Navigating to URL: https://www.saucedemo.com/
+2025-06-12T23:39:45+05:30 [info]: Attempting login for user: standard_user
+2025-06-12T23:39:45+05:30 [info]: Login button clicked
+2025-06-12T23:39:45+05:30 [info]: Adding product to cart: Sauce Labs Backpack
+2025-06-12T23:39:45+05:30 [info]: Product added to cart: Sauce Labs Backpack
+2025-06-12T23:39:45+05:30 [info]: Navigating to cart
+2025-06-12T23:39:45+05:30 [info]: Verifying product in cart: Sauce Labs Backpack
+2025-06-12T23:39:45+05:30 [info]: Proceeding to checkout
+2025-06-12T23:39:45+05:30 [info]: Filling shipping info: John Doe, 12345
+2025-06-12T23:39:45+05:30 [info]: Completing purchase
+2025-06-12T23:39:45+05:30 [info]: Verifying order completion
+2025-06-12T23:39:45+05:30 [info]: Verifying order completion
+2025-06-12T23:49:12+05:30 [info]: Navigating to URL: https://www.saucedemo.com/
+2025-06-12T23:49:12+05:30 [info]: Attempting login for user: standard_user
+2025-06-12T23:49:13+05:30 [info]: Login button clicked
+2025-06-12T23:49:13+05:30 [info]: Adding product to cart: Sauce Labs Backpack
+2025-06-12T23:49:13+05:30 [info]: Product added to cart: Sauce Labs Backpack
+2025-06-12T23:49:13+05:30 [info]: Navigating to cart
+2025-06-12T23:49:13+05:30 [info]: Verifying product in cart: Sauce Labs Backpack
+2025-06-12T23:49:13+05:30 [info]: Proceeding to checkout
+2025-06-12T23:49:13+05:30 [info]: Filling shipping info: John Doe, 12345
+2025-06-12T23:49:13+05:30 [info]: Completing purchase
+2025-06-12T23:49:13+05:30 [info]: Verifying order completion

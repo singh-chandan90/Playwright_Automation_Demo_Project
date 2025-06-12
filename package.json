@@ -4,21 +4,30 @@
   "description": "demo project using playwright for UI and API test Automation",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint src --ext .ts",
-    "lint:fix": "eslint src --ext .ts --fix",
+    "lint": "eslint tests --ext .ts utils --ext .ts",
+    "lint:fix": "eslint tests --ext .ts utils --ext .ts --fix",
     "prepare": "husky install",
-    "test:ui": "npx playwright test src/tests/UI",
-    "test:api": "npx playwright test src/tests/API",
+    "test:ui": "npx playwright test tests/ui-tests",
+    "test:ui:qa": "ENV=qa npx playwright test tests/ui-tests",
+    "test:ui:staging": "ENV=staging npx playwright test tests/ui-tests",
+    "test:api:qa": "ENV=qa npx playwright test tests/api-tests",
+    "test:api:staging": "ENV=staging npx playwright test tests/api-tests",
+    "test:api": "npx playwright test tests/api-tests",
     "test": "npx playwright test",
     "allure:generate": "npx allure generate ./allure-results --clean -o ./allure-report",
-    "allure:open": "npx allure open ./allure-report"
+    "allure:open": "npx allure open ./allure-report",
+    "test:all": "npx playwright test tests/api-tests && npx playwright test tests/ui-tests",
+    "test:all:qa": "ENV=qa npx playwright test tests/api-tests && ENV=qa npx playwright test tests/ui-tests",
+    "test:all:staging": "ENV=staging npx playwright test tests/api-tests && ENV=staging npx playwright test tests/ui-tests"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.52.0",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/crypto-js": "^4.2.2",
+    "@types/faker": "^6.6.8",
     "@types/moment-timezone": "^0.5.13",
     "@types/node": "^22.15.30",
     "@typescript-eslint/eslint-plugin": "^8.34.0",
@@ -33,13 +42,20 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.8.0",
+    "better-sqlite3": "^11.10.0",
     "crypto-js": "^4.2.0",
     "dotenv": "^16.5.0",
     "moment-timezone": "^0.6.0",
-    "winston": "^3.17.0"
+    "mysql2": "^3.14.1",
+    "winston": "^3.17.0",
+    "xlsx": "^0.18.5"
   },
   "lint-staged": {
-    "src/**/*.ts": [
+    "tests/**/*.ts": [
+      "eslint --ext .ts"
+    ],
+    "utils/**/*.ts": [
       "eslint --ext .ts"
     ]
   }

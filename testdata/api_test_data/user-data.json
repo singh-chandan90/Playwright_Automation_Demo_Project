@@ -1,0 +1,30 @@
+{
+  "qa": {
+    "newUser": {
+      "name": "John Doe",
+      "gender": "male",
+      "email": "john.doe.qa@example.com",
+      "status": "active"
+    },
+    "updateUser": {
+      "name": "John Updated QA",
+      "gender": "male",
+      "email": "john.updated.qa@example.com",
+      "status": "inactive"
+    }
+  },
+  "staging": {
+    "newUser": {
+      "name": "Jane Smith",
+      "gender": "female",
+      "email": "jane.smith.staging@example.com",
+      "status": "active"
+    },
+    "updateUser": {
+      "name": "Jane Updated Staging",
+      "gender": "female",
+      "email": "jane.updated.staging@example.com",
+      "status": "inactive"
+    }
+  }
+}
