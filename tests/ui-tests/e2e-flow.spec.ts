@@ -5,7 +5,7 @@ import { CartPage } from "../../pages/cart-page";
 import { CheckoutPage } from "../../pages/checkout-page";
 import { config } from "../../utils/config";
 
-test.describe.serial("End-to-End Workflow", () => {
+test.describe("End-to-End Workflow", () => {
   let page: Page; // Single page instance for all tests
   let loginPage: LoginPage;
   let productsPage: ProductsPage;
@@ -29,7 +29,7 @@ test.describe.serial("End-to-End Workflow", () => {
     await loginPage.login(username, password);
   });
 
-  test("Add product to cart", async () => {
+  test("@JIRA:-101 Add product to cart", async () => {
     await productsPage.addProductToCart(productName);
     await productsPage.goToCart();
     await cartPage.verifyProductInCart(productName);
@@ -37,7 +37,7 @@ test.describe.serial("End-to-End Workflow", () => {
     expect(await cartPage).toBeDefined();
   });
 
-  test("Complete checkout process", async () => {
+  test("@JIRA:-102 Complete checkout process", async () => {
     await cartPage.proceedToCheckout();
     await checkoutPage.fillShippingInfo("John", "Doe", "12345");
     await checkoutPage.completePurchase();
