@@ -51,11 +51,10 @@ Project Folder<br>
 
 ## Description
 
-- `.eslintrc.json`: ESLint configuration file for linting TypeScript code.
+- `.eslint.Config.js`: ESLint configuration file for linting TypeScript and playwright  code.
 - `.gitignore`: Specifies intentionally untracked files to ignore in Git.
 - `package-lock.json` and `package.json`: Node.js package files specifying project dependencies.
 - `playwright.config.ts`: Configuration file for Playwright settings.
-- `requirements.md`: Document outlining project requirements.
 - `tsconfig.json`: TypeScript compiler options file.
 - `config/`: Contains environment configuration files and authentication data (`env.qa.json`, `env.staging.json`).
 - `logging/`: Log files generated during test execution.
@@ -66,7 +65,7 @@ Project Folder<br>
 
 ### `.github`
 
-- `.github/workflows/main.yml`: GitHub Actions workflow file for continuous integration.
+- `.github/workflows/playwright.yml`: GitHub Actions workflow file for continuous integration.
 
 ### `playwright-report`
 
