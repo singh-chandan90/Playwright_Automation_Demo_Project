@@ -1,8 +1,8 @@
-import { test, expect, request, APIRequestContext } from '@playwright/test';
-import { config } from '../../utils/config';
-import { CreateUserData } from '../../testdata/api_test_data/create-user-data';
+import { test, expect, request, APIRequestContext } from "@playwright/test";
+import { config } from "../../utils/config";
+import { CreateUserData } from "../../testdata/api_test_data/create-user-data";
 
-const env = process.env.ENV || 'qa';
+const env = process.env.ENV || "qa";
 const BASE_URL = config.apiBaseUrl;
 
 /**
@@ -14,7 +14,7 @@ const BASE_URL = config.apiBaseUrl;
  *
  * Uses the CreateUserData class to generate random user data for each test run.
  */
-test.describe('Create User API test', () => {    
+test.describe("Create User API test", () => {
   let apiContext: APIRequestContext;
   let createdUserId: number | undefined;
 
@@ -29,19 +29,20 @@ test.describe('Create User API test', () => {
    * Should create a user with valid random data.
    * Expects HTTP 201 and a numeric user id in the response.
    */
-  test('should create a user with valid data', async () => {
-    const newUser = new CreateUserData(env as 'qa' | 'staging');
-    const response = await apiContext.post('/public/v2/users', {
+  test("@JIRA:-201 should create a user with valid data", async () => {
+    const newUser = new CreateUserData(env as "qa" | "staging");
+    const response = await apiContext.post("/public/v2/users", {
       data: newUser,
-      headers: { 'Content-Type': 'application/json',
-        Authorization: `Bearer ${config.apiToken}`  
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${config.apiToken}`,
       },
     });
 
     expect(response.status()).toBe(201);
     const body = await response.json();
-    expect(body).toHaveProperty('id');
-    expect(typeof body.id).toBe('number');
+    expect(body).toHaveProperty("id");
+    expect(typeof body.id).toBe("number");
     //createdUserId = body.id;
 
     // Validate request body equals response body (excluding id)
@@ -57,15 +58,16 @@ test.describe('Create User API test', () => {
    * Should fail to create a user when email is missing.
    * Expects HTTP 422 (Unprocessable Entity).
    */
-  test('should fail to create a user with missing email', async () => {
-    const newUser = new CreateUserData(env as 'qa' | 'staging');
+  test("@JIRA:-202 should fail to create a user with missing email", async () => {
+    const newUser = new CreateUserData(env as "qa" | "staging");
     // Remove email
     const userWithoutEmail = { ...newUser, email: undefined };
-    const response = await apiContext.post('/public/v2/users', {
+    const response = await apiContext.post("/public/v2/users", {
       data: userWithoutEmail,
-      headers: { 'Content-Type': 'application/json',
-        Authorization: `Bearer ${config.apiToken}`  // Assuming an API token is required
-       },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${config.apiToken}`, // Assuming an API token is required
+      },
     });
     expect(response.status()).toBe(422);
   });
@@ -74,13 +76,14 @@ test.describe('Create User API test', () => {
    * Should fail to create a user with an invalid email format.
    * Expects HTTP 422 (Unprocessable Entity).
    */
-  test('should fail to create a user with invalid email', async () => {
-    const newUser = new CreateUserData(env as 'qa' | 'staging');
-    const userWithInvalidEmail = { ...newUser, email: 'not-an-email' };
-    const response = await apiContext.post('/public/v2/users', {
+  test("@JIRA:-203 should fail to create a user with invalid email", async () => {
+    const newUser = new CreateUserData(env as "qa" | "staging");
+    const userWithInvalidEmail = { ...newUser, email: "not-an-email" };
+    const response = await apiContext.post("/public/v2/users", {
       data: userWithInvalidEmail,
-      headers: { 'Content-Type': 'application/json',
-        Authorization: `Bearer ${config.apiToken}`
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${config.apiToken}`,
       },
     });
     expect(response.status()).toBe(422);
@@ -90,13 +93,14 @@ test.describe('Create User API test', () => {
    * Should fail to create a user when name is missing.
    * Expects HTTP 422 (Unprocessable Entity).
    */
-  test('should fail to create a user with missing name', async () => {
-    const newUser = new CreateUserData(env as 'qa' | 'staging');
+  test("@JIRA:-204 should fail to create a user with missing name", async () => {
+    const newUser = new CreateUserData(env as "qa" | "staging");
     const userWithoutName = { ...newUser, name: undefined };
-    const response = await apiContext.post('/public/v2/users', {
+    const response = await apiContext.post("/public/v2/users", {
       data: userWithoutName,
-      headers: { 'Content-Type': 'application/json',
-        Authorization: `Bearer ${config.apiToken}`
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${config.apiToken}`,
       },
     });
     expect(response.status()).toBe(422);
@@ -106,23 +110,25 @@ test.describe('Create User API test', () => {
    * Should fail to create a user with a duplicate email address.
    * Expects HTTP 422 (Unprocessable Entity).
    */
-  test('should fail to create a user with duplicate email', async () => {
-    const newUser = new CreateUserData(env as 'qa' | 'staging');
+  test("@JIRA:-205 should fail to create a user with duplicate email", async () => {
+    const newUser = new CreateUserData(env as "qa" | "staging");
     // First, create a user
-    const response1 = await apiContext.post('/public/v2/users', {
+    const response1 = await apiContext.post("/public/v2/users", {
       data: newUser,
-      headers: { 'Content-Type': 'application/json',
-        Authorization: `Bearer ${config.apiToken}`
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${config.apiToken}`,
       },
     });
     expect(response1.status()).toBe(201);
     // Try to create another user with the same email
-    const userWithDuplicateEmail = new CreateUserData(env as 'qa' | 'staging');
+    const userWithDuplicateEmail = new CreateUserData(env as "qa" | "staging");
     userWithDuplicateEmail.email = newUser.email;
-    const response2 = await apiContext.post('/public/v2/users', {
+    const response2 = await apiContext.post("/public/v2/users", {
       data: userWithDuplicateEmail,
-      headers: { 'Content-Type': 'application/json',
-        Authorization: `Bearer ${config.apiToken}`
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${config.apiToken}`,
       },
     });
     expect(response2.status()).toBe(422);
@@ -132,13 +138,13 @@ test.describe('Create User API test', () => {
    * Should fail to create a user with an invalid token.
    * Expects HTTP 401 (Unauthorized) or 403 (Forbidden).
    */
-  test('should fail to create a user with invalid token', async () => {
-    const newUser = new CreateUserData(env as 'qa' | 'staging');
-    const response = await apiContext.post('/public/v2/users', {
+  test("@JIRA:-206 should fail to create a user with invalid token", async () => {
+    const newUser = new CreateUserData(env as "qa" | "staging");
+    const response = await apiContext.post("/public/v2/users", {
       data: newUser,
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer invalid_token_123',
+        "Content-Type": "application/json",
+        Authorization: "Bearer invalid_token_123",
       },
     });
     expect(response.status()).toBe(401);
@@ -148,13 +154,14 @@ test.describe('Create User API test', () => {
    * Should fail to create a user with an invalid gender.
    * Expects HTTP 422 (Unprocessable Entity).
    */
-  test('should fail to create a user with invalid gender', async () => {
-    const newUser = new CreateUserData(env as 'qa' | 'staging');
-    const userWithInvalidGender = { ...newUser, gender: 'other' };
-    const response = await apiContext.post('/public/v2/users', {
+  test("@JIRA:-207 should fail to create a user with invalid gender", async () => {
+    const newUser = new CreateUserData(env as "qa" | "staging");
+    const userWithInvalidGender = { ...newUser, gender: "other" };
+    const response = await apiContext.post("/public/v2/users", {
       data: userWithInvalidGender,
-      headers: { 'Content-Type': 'application/json',
-        Authorization: `Bearer ${config.apiToken}`
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${config.apiToken}`,
       },
     });
     expect(response.status()).toBe(422);
@@ -164,13 +171,14 @@ test.describe('Create User API test', () => {
    * Should fail to create a user with an invalid status.
    * Expects HTTP 422 (Unprocessable Entity).
    */
-  test('should fail to create a user with invalid status', async () => {
-    const newUser = new CreateUserData(env as 'qa' | 'staging');
-    const userWithInvalidStatus = { ...newUser, status: 'pending' };
-    const response = await apiContext.post('/public/v2/users', {
+  test("@JIRA:-208 should fail to create a user with invalid status", async () => {
+    const newUser = new CreateUserData(env as "qa" | "staging");
+    const userWithInvalidStatus = { ...newUser, status: "pending" };
+    const response = await apiContext.post("/public/v2/users", {
       data: userWithInvalidStatus,
-      headers: { 'Content-Type': 'application/json',
-        Authorization: `Bearer ${config.apiToken}`
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${config.apiToken}`,
       },
     });
     expect(response.status()).toBe(422);
@@ -182,11 +190,15 @@ test.describe('Create User API test', () => {
   test.afterAll(async () => {
     // Cleanup: delete the created user if it exists
     if (createdUserId) {
-      const deleteResponse = await apiContext.delete(`/public/v2/users/${createdUserId}`, {
-        headers: { 'Content-Type': 'application/json',
-          Authorization: `Bearer ${config.apiToken}`
-        },
-      });
+      const deleteResponse = await apiContext.delete(
+        `/public/v2/users/${createdUserId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${config.apiToken}`,
+          },
+        }
+      );
       // Optionally, check for successful deletion (204 or 200)
       expect(deleteResponse.status()).toBe(204);
     }
