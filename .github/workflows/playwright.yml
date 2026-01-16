@@ -1,66 +1,96 @@
-name: Playwright Tests
+name: Playwright Tests (UI + API)
+
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
+  workflow_dispatch:
+
 jobs:
   ui-tests:
-    name: Run UI Tests
-    timeout-minutes: 60
+    name: UI Tests (${{ matrix.env }})
     runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    strategy:
+      matrix:
+        env: [qa, staging]
+
+    env:
+      ENV: ${{ matrix.env }}
+      BASE_URL: ${{ secrets[format('{0}_BASE_URL', upper(matrix.env))] }}
+      USERNAME: ${{ secrets[format('{0}_USERNAME', upper(matrix.env))] }}
+      PASSWORD: ${{ secrets[format('{0}_PASSWORD', upper(matrix.env))] }}
+      ALLURE_RESULTS_DIR: ./allure-results-ui
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
+
       - name: Install dependencies
         run: npm ci
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Run Playwright UI tests
-        run: npx playwright test src/tests/UI/
-      - name: Generate Allure Report (UI)
-        run: npm run allure:generate
+
+      - name: Run UI tests
+        run: npx playwright test tests/ui-tests/
+
+      - name: Generate Allure Report
+        if: always()
+        run: npx allure generate ./allure-results-ui --clean -o ./allure-report-ui
+
       - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
+        if: always()
         with:
-          name: allure-ui-report
-          path: allure-report/
-          retention-days: 30
-      - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
-        with:
-          name: playwright-ui-report
-          path: playwright-report/
+          name: allure-ui-report-${{ matrix.env }}
+          path: allure-report-ui/
           retention-days: 30
 
   api-tests:
-    name: Run API Tests
-    timeout-minutes: 60
+    name: API Tests (${{ matrix.env }})
     runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    strategy:
+      matrix:
+        env: [qa, staging]
+
+    env:
+      ENV: ${{ matrix.env }}
+      API_BASE_URL: ${{ secrets[format('{0}_API_BASE_URL', upper(matrix.env))] }}
+      API_TOKEN: ${{ secrets[format('{0}_API_TOKEN', upper(matrix.env))] }}
+      SQL_DB_USER: ${{ secrets[format('{0}_SQL_DB_USER', upper(matrix.env))] }}
+      SQL_DB_PWD: ${{ secrets[format('{0}_SQL_DB_PWD', upper(matrix.env))] }}
+      ALLURE_RESULTS_DIR: ./allure-results-api
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
+
       - name: Install dependencies
         run: npm ci
-      - name: Install Playwright Browsers
+
+      - name: Install Playwright
         run: npx playwright install --with-deps
-      - name: Run Playwright API tests
-        run: npx playwright test src/tests/API/
-      - name: Generate Allure Report (API)
-        run: npm run allure:generate
+
+      - name: Run API tests
+        run: npx playwright test tests/api-tests/
+
+      - name: Generate Allure Report
+        if: always()
+        run: npx allure generate ./allure-results-api --clean -o ./allure-report-api
+
       - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
+        if: always()
         with:
-          name: allure-api-report
-          path: allure-report/
-          retention-days: 30
-      - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
-        with:
-          name: playwright-api-report
-          path: playwright-report/
+          name: allure-api-report-${{ matrix.env }}
+          path: allure-report-api/
           retention-days: 30
